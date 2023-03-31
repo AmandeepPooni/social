@@ -7,10 +7,13 @@ import * as express from 'express'
 import todos from './routes/todos'
 import posts from './routes/posts'
 import comments from './routes/comments'
+import auth from './routes/auth'
 
 initializeApp();
 
 var app = express()
+
+app.use('/auth', auth)
 
 app.use('/todos', todos)
 app.use('/posts', posts)
