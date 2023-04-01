@@ -1,24 +1,12 @@
-import { Request, Response } from 'express'
 import { Post } from '../../interfaces/posts'
-import { Send } from 'express-serve-static-core'
 import { getFirestore } from "firebase-admin/firestore"
 
-
-interface _Request extends Request {}
-
-interface _Response extends Response {
-    json: Send<Array<Post>, this>
-}
-
-export default async function (req: _Request, res: _Response) {
+export default async function (author: string, after: string, limit: number) {
 
     const db = getFirestore()
 
     // requires a compound index to be created in the database
-    let reference = db.collection('posts').where('author', '==', 'abc').orderBy('created', 'desc')
-
-    const after = req.query.after as string
-    const limit = Number(req.query.limit)
+    let reference = db.collection('posts').where('author', '==', author).orderBy('created', 'desc')
 
     // implements query cursor based on id of last received post
     if(after){
@@ -38,6 +26,6 @@ export default async function (req: _Request, res: _Response) {
         posts.push(doc.data() as Post)
     })
 
-    res.json(posts)
+    return posts
 
 }

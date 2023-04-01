@@ -1,26 +1,12 @@
-import { Request, Response } from 'express'
 import { Comment } from '../../interfaces/comments'
-import { Send } from 'express-serve-static-core'
 import { getFirestore } from "firebase-admin/firestore"
 
-
-interface _Request extends Request {}
-
-interface _Response extends Response {
-    json: Send<Array<Comment>, this>
-}
-
-export default async function (req: _Request, res: _Response) {
+export default async function (postId: string, after: string, limit: number) {
 
     const db = getFirestore()
 
-    const postId = req.params.id
-
     // requires a compound index to be created in the database
     let reference = db.collection('comments').where('post', '==', postId).orderBy('created', 'desc')
-
-    const after = req.query.after as string
-    const limit = Number(req.query.limit)
 
     // implements query cursor based on id of last received comment
     if(after){
@@ -40,6 +26,6 @@ export default async function (req: _Request, res: _Response) {
         comments.push(doc.data() as Comment)
     })
 
-    res.json(comments)
+    return comments
 
 }

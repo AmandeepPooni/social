@@ -1,24 +1,11 @@
-import { Request, Response } from 'express'
 import { createHmac } from 'crypto'
-import { Send } from 'express-serve-static-core'
 import { User } from '../../interfaces/auth'
 import { getFirestore } from "firebase-admin/firestore"
 
-interface _Request extends Request {
-    body: User
-}
-
-interface _Response extends Response {
-    json: Send<string, this>
-}
-
-export default async function (req: _Request, res: _Response) {
-
-    const user = req.body
-
+export default async function (user: User) {
     const db = getFirestore()
     const userRef = db.collection('users').doc(user.id)
-    const responseText = await db.runTransaction(async t => {
+    return await db.runTransaction(async t => {
         const doc = await t.get(userRef)
         if (!doc.exists) {
             const hash = createHmac('sha256', process.env.HMAC_KEY as string).update(user.password).digest('hex')
@@ -34,6 +21,4 @@ export default async function (req: _Request, res: _Response) {
             return "User with this id already exists"
         }
     })
-
-    res.json(responseText)
 }
