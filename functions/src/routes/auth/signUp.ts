@@ -24,7 +24,8 @@ export default async function (req: _Request, res: _Response) {
             const hash = createHmac('sha256', process.env.HMAC_KEY as string).update(user.password).digest('hex')
             const newUser: User = {
                 id: user.id,
-                password: hash
+                password: hash,
+                role: 'standard'
             }
             t.set(userRef, newUser)
             return "New user created"

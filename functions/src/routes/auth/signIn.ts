@@ -24,7 +24,7 @@ export default async function (req: _Request, res: _Response) {
     let response = "Failed to login"
     let status = 401
     if (timingSafeEqual(Buffer.from(hash), Buffer.from(storedHash))) {
-        response = sign({ id: storedUser.id }, process.env.JWT_KEY as string, { expiresIn: '1h' })
+        response = sign({ id: storedUser.id, role: storedUser.role }, process.env.JWT_KEY as string, { expiresIn: '1h' })
         status = 200
     }
 
