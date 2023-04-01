@@ -1,6 +1,6 @@
-// import * as functions from "firebase-functions";
+// import * as functions from "firebase-functions"
 import { onRequest } from 'firebase-functions/v2/https'
-import { initializeApp } from "firebase-admin/app";
+import { initializeApp } from "firebase-admin/app"
 import * as express from 'express'
 
 // Route modules
@@ -10,10 +10,10 @@ import comments from './routes/comments'
 import auth from './routes/auth'
 
 //authentication middleware
-import authenticate from './middlewares/authenticate';
+import authenticate from './middlewares/authenticate'
 
 
-initializeApp();
+initializeApp()
 
 var app = express()
 
