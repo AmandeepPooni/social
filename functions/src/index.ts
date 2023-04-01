@@ -9,16 +9,20 @@ import posts from './routes/posts'
 import comments from './routes/comments'
 import auth from './routes/auth'
 
+//authentication middleware
+import authenticate from './middlewares/authenticate';
+
+
 initializeApp();
 
 var app = express()
 
 app.use('/auth', auth)
 
-app.use('/todos', todos)
-app.use('/posts', posts)
-app.use('/comments', comments)
+app.use('/todos', authenticate, todos)
+app.use('/posts', authenticate, posts)
+app.use('/comments', authenticate, comments)
 
 
-// Export express app as a cloud function
+// Expose express app as a cloud function
 export const api = onRequest(app)

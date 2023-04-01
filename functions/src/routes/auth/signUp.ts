@@ -8,11 +8,11 @@ interface _Request extends Request {
     body: User
 }
 
-interface _Reponse extends Response {
+interface _Response extends Response {
     json: Send<string, this>
 }
 
-export default async function (req: _Request, res: _Reponse) {
+export default async function (req: _Request, res: _Response) {
 
     const user = req.body
 

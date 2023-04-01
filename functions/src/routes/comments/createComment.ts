@@ -7,11 +7,11 @@ interface _Request extends Request {
     body: Comment
 }
 
-interface _Reponse extends Response {
+interface _Response extends Response {
     json: Send<string, this>
 }
 
-export default async function (req: _Request, res: _Reponse) {
+export default async function (req: _Request, res: _Response) {
     const db = getFirestore()
     let commentRef = db.collection('comments').doc()
     let comment = req.body

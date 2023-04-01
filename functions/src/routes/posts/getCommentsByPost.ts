@@ -4,13 +4,17 @@ import { Send } from 'express-serve-static-core'
 import { getFirestore } from "firebase-admin/firestore"
 
 
-interface _Request extends Request {}
+interface _Request extends Request {
+    [x: string]: any;
+}
 
-interface _Reponse extends Response {
+interface _Response extends Response {
     json: Send<Array<Comment>, this>
 }
 
-export default async function (req: _Request, res: _Reponse) {
+export default async function (req: _Request, res: _Response) {
+
+    console.log(req.token)
 
     const db = getFirestore()
 

@@ -9,11 +9,11 @@ interface _Request extends Request {
     body: User
 }
 
-interface _Reponse extends Response {
+interface _Response extends Response {
     json: Send<string, this>
 }
 
-export default async function (req: _Request, res: _Reponse) {
+export default async function (req: _Request, res: _Response) {
     let user = req.body
     const hash = createHmac('sha256', process.env.HMAC_KEY as string).update(user.password).digest('hex')
     const db = getFirestore()
@@ -24,8 +24,8 @@ export default async function (req: _Request, res: _Reponse) {
     let response = "Failed to login"
     let status = 401
     if (timingSafeEqual(Buffer.from(hash), Buffer.from(storedHash))) {
-        response = sign(storedUser, process.env.JWT_KEY as string)
-        status=200
+        response = sign({ id: storedUser.id }, process.env.JWT_KEY as string, { expiresIn: '1h' })
+        status = 200
     }
 
     res.status(status).json(response)

@@ -4,11 +4,11 @@ import { getFirestore } from "firebase-admin/firestore"
 
 interface _Request extends Request {}
 
-interface _Reponse extends Response {
+interface _Response extends Response {
     json: Send<string, this>
 }
 
-export default async function (req: _Request, res: _Reponse) {
+export default async function (req: _Request, res: _Response) {
     const db = getFirestore()
     const postId = req.params.id
     let postRef = db.collection('posts').doc(postId)
