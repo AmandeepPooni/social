@@ -33,16 +33,17 @@ There can be multiple ways to access the comments that might be needed: by post,
 
 ## List of compound indexes
 
-![Terminal screenshot decipting tests](./index_screenshot.png)
+![Firestore console showing list of compound indexes](./index_screenshot.png)
 
+## Refresh tokens
 
-Refresh tokens implemented simply are actually a security risk. So we are going to rotate them.
+Refresh tokens implemented simply are a security risk. So we are going to rotate them, (Invalidate previous refresh token when generating a new access token).
 
 
 ## Tests screenshot
 
 
-![Terminal screenshot decipting tests](./screenshot.png)
+![Terminal screenshot decipting tests](./tests-screenshot.png)
 
 
 ## Caveats for this app (as of now):
