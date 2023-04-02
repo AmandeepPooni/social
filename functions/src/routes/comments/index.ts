@@ -14,8 +14,12 @@ router.post('/', async (req: _Request , res) => {
     res.json(await createComment(req.token.id, req.body))
 })
 
-router.get('/posts/:id', async (req: _Request, res) => {
-    res.json(await getCommentsByPost(req.params.id, req.query.after as string, Number(req.query.limit)))
+router.get('/', async (req: _Request, res) => {
+    let postId = null
+    if(req.query.post){
+        postId = req.query.post as string
+    }
+    res.json(await getCommentsByPost(postId, req.query.after as string, Number(req.query.limit)))
 })
 
 router.delete('/:id', rbac("comments"), async (req , res) => {

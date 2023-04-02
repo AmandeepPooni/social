@@ -70,6 +70,7 @@ Response
 ```
 
 ### GET /todos
+Query parameters (optional): author, after, limit \
 Response
 ```json
 [
@@ -119,6 +120,7 @@ Response
 ```
 
 ### GET /posts
+Query parameters (optional): author, after, limit \
 Response
 ```json
 [
@@ -167,7 +169,8 @@ Response
 }
 ```
 
-### GET /comments/posts/:postId
+### GET /comments
+Query parameters (optional): post, after, limit \
 Response
 ```json
 [
@@ -224,7 +227,7 @@ Performing analytics and complex queries becomes harder and harder the more nest
 
 In the end, it will be a business decision. I chose to put all the read and write operations in comments module itself purely because it makes it very easy to do the unit testing, but there are plenty of reasons not to put it within comment module itself:
 
-There can be multiple ways to access the comments that might be needed: by post, by author, by comment id itself and so on, so its more logical to separate the "read" concerns. This will also result in a more sensible URL structure. For ex. "/posts/123/comments" looks like it will return comments for the post "123", and so it will. (right now it looks like "/comments/posts/123")
+There can be multiple ways to access the comments that might be needed: by post, by author, by comment id itself and so on, so its more logical to separate the "read" concerns. This will also result in a more sensible URL structure. For ex. "/posts/123/comments" looks like it will return comments for the post "123", and so it will. (right now it looks like "/comments?post=")
 
 
 

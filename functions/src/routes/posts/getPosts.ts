@@ -1,12 +1,14 @@
 import { Post } from '../../interfaces/posts'
 import { getFirestore } from "firebase-admin/firestore"
 
-export default async function (author: string, after: string, limit: number) {
+export default async function (authorId: string | null, after: string, limit: number) {
 
     const db = getFirestore()
 
-    // requires a compound index to be created in the database
-    let reference = db.collection('posts').where('author', '==', author).orderBy('created', 'desc')
+    let reference: any = db.collection('posts')
+    if(authorId) reference = reference.where('author', '==', authorId)
+
+    reference = reference.orderBy('created', 'desc')
 
     // implements query cursor based on id of last received post
     if(after){
@@ -22,7 +24,7 @@ export default async function (author: string, after: string, limit: number) {
     let posts: Array<Post> = []
 
     const snapshot = await reference.get()
-    snapshot.forEach(doc => {
+    snapshot.forEach((doc: any) => {
         posts.push(doc.data() as Post)
     })
 

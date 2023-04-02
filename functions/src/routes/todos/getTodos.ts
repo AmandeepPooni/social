@@ -1,12 +1,16 @@
 import { Todo } from '../../interfaces/todos'
 import { getFirestore } from "firebase-admin/firestore"
 
-export default async function (author: string, after: string, limit: number) {
+export default async function (authorId: string | null, after: string, limit: number) {
 
     const db = getFirestore()
 
-    // requires a compound index to be created in the database
-    let reference = db.collection('todos').where('author', '==', author).orderBy('created', 'desc')
+    
+    let reference: any = db.collection('todos')
+    if(authorId) reference = reference.where('author', '==', authorId)
+
+    reference = reference.orderBy('created', 'desc')
+
 
     // implements query cursor based on id of last received todo
     if(after){
@@ -22,7 +26,7 @@ export default async function (author: string, after: string, limit: number) {
     let todos: Array<Todo> = []
 
     const snapshot = await reference.get()
-    snapshot.forEach(doc => {
+    snapshot.forEach((doc: any) => {
         todos.push(doc.data() as Todo)
     })
 

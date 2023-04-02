@@ -16,7 +16,11 @@ router.post('/', async (req: _Request, res) => {
 })
 
 router.get('/', async (req: _Request, res) => {
-    res.json(await getTodos(req.token.id, req.query.after as string, Number(req.query.limit)))
+    let authorId = null
+    if(req.query.author){
+        authorId = req.query.author as string
+    }
+    res.json(await getTodos(authorId, req.query.after as string, Number(req.query.limit)))
 })
 
 router.put('/:id', rbac("todos"), async (req, res) => {
