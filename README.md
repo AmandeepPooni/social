@@ -40,7 +40,7 @@ There can be multiple ways to access the comments that might be needed: by post,
 Refresh tokens implemented simply are a security risk. So we are going to rotate them, (Invalidate previous refresh token when generating a new access token).
 
 
-## Tests screenshot
+## Tests
 
 
 ![Terminal screenshot decipting tests](./tests-screenshot.png)
