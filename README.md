@@ -223,7 +223,7 @@ delete all comments feature for user (lets say the user wants that before he del
 Performing analytics and complex queries becomes harder and harder the more nested any data is.
 
 
-## Decision faced: To put make getposts controller part of comments router, or part of posts controller.
+## Decision faced: To put make getComments controller part of comments router, or part of posts controller.
 
 In the end, it will be a business decision. I chose to put all the read and write operations in comments module itself purely because it makes it very easy to do the unit testing, but there are plenty of reasons not to put it within comment module itself:
 
