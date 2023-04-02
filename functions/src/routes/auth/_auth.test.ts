@@ -10,7 +10,7 @@ beforeAll(() => {
     })
 })
 
-describe("Auth module test", () => {
+describe("Auth module", () => {
 
     const testUser = { id: "__testuser__"+Date.now(), password: "__testpassword__"+Date.now(), role: '' }
 

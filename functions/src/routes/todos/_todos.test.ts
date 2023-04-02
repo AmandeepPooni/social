@@ -12,7 +12,7 @@ beforeAll(() => {
     })
 })
 
-describe("Todo module test", () => {
+describe("Todos module", () => {
 
     const testTodo: Todo = {
         id: '',

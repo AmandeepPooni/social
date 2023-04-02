@@ -14,7 +14,7 @@ router.post('/', async (req , res) => {
     res.json(await createComment(req.body))
 })
 
-router.get('/:id/comments', async (req: _Request, res) => {
+router.get('/posts/:id', async (req: _Request, res) => {
     res.json(await getCommentsByPost(req.params.id, req.query.after as string, Number(req.query.limit)))
 })
 
