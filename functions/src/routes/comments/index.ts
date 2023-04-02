@@ -10,8 +10,8 @@ interface _Request extends Request {
 
 var router = Router()
 
-router.post('/', async (req , res) => {
-    res.json(await createComment(req.body))
+router.post('/', async (req: _Request , res) => {
+    res.json(await createComment(req.token.id, req.body))
 })
 
 router.get('/posts/:id', async (req: _Request, res) => {

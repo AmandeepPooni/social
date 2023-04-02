@@ -1,7 +1,7 @@
 import { Comment } from '../../interfaces/comments'
 import { getFirestore } from "firebase-admin/firestore"
 
-export default async function (comment: Comment) {
+export default async function (author: string, comment: Comment) {
     const db = getFirestore()
     let commentRef = db.collection('comments').doc()
     return await db.runTransaction(async t => {
@@ -11,7 +11,7 @@ export default async function (comment: Comment) {
                 id: commentRef.id,
                 content: comment.content,
                 post: comment.post,
-                author: 'abc',
+                author: author,
                 created: Date.now()
             }
             t.set(commentRef, newComment)

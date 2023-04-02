@@ -38,13 +38,13 @@ describe("Comments module", () => {
     })
 
     it("Should create a new comment", async () => {
-        const result = await createComment({...testComment, post: testPostId})
+        const result = await createComment(testPost.author, {...testComment, post: testPostId})
         if(result.id) testCommentId = result.id
         expect(typeof result.id).toBe("string")
     })
 
     it("Should not create comment on non existent post", async () => {
-        const result = await createComment({...testComment, post:"__non__"+Date.now()})
+        const result = await createComment(testPost.author, {...testComment, post:"__non__"+Date.now()})
         expect(typeof result.message).toBe("string")
     })
 

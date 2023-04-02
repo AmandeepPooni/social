@@ -1,3 +1,199 @@
+# API endpoints
+
+Base URL: https://api-riuwhqsd3q-uc.a.run.app
+
+## Authentication
+### POST /auth/signup
+Request body
+```json
+{
+    "id": "new_test_id",
+    "password": "password"
+}
+```
+Response
+```json
+"New user created"
+```
+
+### POST /auth/signin
+Request body
+```json
+{
+    "id": "new_test_id",
+    "password": "password"
+}
+```
+Response
+```json
+{
+    "token": "<GENERATED TOKEN>",
+    "refresh": "<GENERATED REFRESH TOKEN>",
+    "message": "Login successful"
+}
+```
+
+### POST /auth/token
+Request body
+```json
+{
+    "id": "new_test_id",
+    "refresh": "<GENERATED REFRESH TOKEN>"
+}
+```
+Response
+```json
+{
+    "token": "<NEW GENERATED TOKEN>",
+    "refresh": "<NEW GENERATED REFRESH TOKEN>",
+    "message": "Login successful"
+}
+```
+
+## ⚠ For all further requests, include "Bearer \<token>" in Authorization header 
+
+## Todos
+
+### POST /todos
+Request body
+```json
+{
+   "content": "To do item",
+   "status": "pending"
+}
+```
+Response
+```json
+{
+    "id": "OqbEMNChr8i3IKZbep2Z"
+}
+```
+
+### GET /todos
+Response
+```json
+[
+    {
+        "author": "new_test_id",
+        "created": 1680426644749,
+        "id": "OqbEMNChr8i3IKZbep2Z",
+        "content": "To do item",
+        "status": "pending"
+    }
+]
+```
+
+### PUT /todos/:id
+Request body
+```json
+{
+   "content": "To do item updated",
+   "status": "pending"
+}
+```
+Response
+```json
+true
+```
+
+### DELETE /todos/:id
+Response
+```json
+true
+```
+
+## Posts
+
+### POST /posts
+Request body
+```json
+{
+   "content": "New post"
+}
+```
+Response
+```json
+{
+    "id": "xPKd81MWx9FJsPbQOHF5"
+}
+```
+
+### GET /posts
+Response
+```json
+[
+    {
+        "author": "new_test_id",
+        "created": 1680427367026,
+        "id": "xPKd81MWx9FJsPbQOHF5",
+        "content": "New post"
+    }
+]
+```
+
+### PUT /posts/:id
+Request body
+```json
+{
+   "content": "Post updated",
+   "status": "pending"
+}
+```
+Response
+```json
+true
+```
+
+### DELETE /posts/:id
+Response
+```json
+true
+```
+
+## Comments
+
+### POST /comments
+Request body
+```json
+{
+   "content": "Comment on a post",
+   "post": "2iWwmKUwlN87EOHP5QIe"
+}
+```
+Response
+```json
+{
+    "id": "QXMSs3ZBf2CxlkKJHeMo"
+}
+```
+
+### GET /comments/posts/:postId
+Response
+```json
+[
+    {
+        "post": "2iWwmKUwlN87EOHP5QIe",
+        "author": "new_test_id",
+        "created": 1680427752284,
+        "id": "QXMSs3ZBf2CxlkKJHeMo",
+        "content": "Comment on a post"
+    }
+]
+```
+
+### DELETE /comments/:id
+Response
+```json
+true
+```
+
+## Unit tests
+![Terminal screenshot decipting tests](./tests-screenshot.png)
+
+## List of compound indexes
+![Firestore console showing list of compound indexes](./index_screenshot.png)
+
+
 # Personal logs during development
 
 ## Why go for a folder structure instead of file for routes (contained in one)
@@ -10,7 +206,8 @@ For example, if down the road, we want to make a small change to procedures in o
 
 Document size limit in databases like firestore and mongodb will otherwise limit how much comments you can accomodate in a post.
 
-Firestore however provides a subcollection feature, but general pattern while working with NoSQL databses should be that if we're not able to migrate our architecture from one database to other similar database (For ex. Firestore -> MongoDB), then we need to reconsider that architecture.\ This assumption makes the overall architecture clean, safe and scalable.
+Firestore however provides a subcollection feature, but general pattern while working with NoSQL databses should be that if we're not able to migrate our architecture from one database to other similar database (For ex. Firestore -> MongoDB), then we need to reconsider that architecture.\
+This assumption makes the overall architecture clean, safe and scalable.
 
 In most usecases, comments should only be visible when user clicks on show comments as it reduces loading overhead and makes the overall app faster. In firestore, fetching a document means that you'll get and be charged for the whole document.
 
@@ -31,19 +228,9 @@ There can be multiple ways to access the comments that might be needed: by post,
 
 
 
-## List of compound indexes
-
-![Firestore console showing list of compound indexes](./index_screenshot.png)
-
 ## Refresh tokens
 
 Refresh tokens implemented simply are a security risk. So we are going to rotate them, (Invalidate previous refresh token when generating a new access token).
-
-
-## Tests
-
-
-![Terminal screenshot decipting tests](./tests-screenshot.png)
 
 
 ## Caveats for this app (as of now):
