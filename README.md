@@ -2,9 +2,7 @@
 
 API base URL: https://api-riuwhqsd3q-uc.a.run.app
 
-Sample web app: https://social-to-do.web.app
-
-You can create a new account or use (Amandeep,abc) as credentials
+Sample web app: https://social-to-do.web.app (for the web you can create a new account or use (Amandeep,abc) as credentials)
 
 ## Authentication
 ### POST /auth/signup
