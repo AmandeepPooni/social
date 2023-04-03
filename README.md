@@ -203,8 +203,8 @@ true
 
 # Personal logs during development
 
-## Why go for a folder structure instead of file for routes (contained in one)
-You can and should contain request types within the same file as request itself and just keep other types separate.\
+## Why separate folder for each route, instead of separate file for each route
+You can and should contain request types within the same file as the request itself and just keep other types separate.\
 Its very tempting to abstract something that we see as repeating, but its important to keep in mind that being reusable should not be the only criteria for abstraction.
 
 For example, if down the road, we want to make a small change to procedures in one route, but that procedure is also being used by other routes, it quickly goes from "code looks cleaner this way" to "just sacrificed 2 days of costly development time for something that could have been done within 10 minutes"
