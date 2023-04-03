@@ -1,6 +1,8 @@
 # API endpoints
 
-Base URL: https://api-riuwhqsd3q-uc.a.run.app
+API base URL: https://api-riuwhqsd3q-uc.a.run.app
+
+Sample web app: https://social-to-do.web.app
 
 ## Authentication
 ### POST /auth/signup
@@ -190,12 +192,14 @@ Response
 true
 ```
 
-## Unit tests
-![Terminal screenshot decipting tests](./tests-screenshot.png)
-
 ## List of compound indexes
 ![Firestore console showing list of compound indexes](./index_screenshot.png)
 
+## Unit tests
+![Terminal screenshot decipting tests](./tests-screenshot.png)
+
+## Web app (VueJS)
+![Home page of sample app](./frontend.png)
 
 # Personal logs during development
 

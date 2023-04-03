@@ -8,6 +8,9 @@ const id = ref("")
 const password = ref("")
 
 
+const error = ref("")
+
+
 onMounted(() => {
 })
 
@@ -28,6 +31,7 @@ function signin() {
       localStorage.setItem('id', id.value)
       window.location = "/"
     })
+    .catch(_ => error.value = "Error while signing in")
 }
 
 function signup() {
@@ -42,6 +46,7 @@ function signup() {
     .then(response => {
       return signin()
     })
+    .catch(_ => error.value = "Could not create acount")
 }
 
 </script>
@@ -51,14 +56,15 @@ function signup() {
     <div class="login-form">
       <input type="text" class="login-input" placeholder="User ID" v-model.trim="id">
       <input type="password" class="login-input" placeholder="Password" v-model="password">
-      <button class="login-button" @click="signin()" >SIGNIN</button>
-      <button class="login-button" @click="signup()" >SIGNUP</button>
+      <button class="login-button" @click="signin()">SIGNIN</button>
+      <button class="login-button" @click="signup()">SIGNUP</button>
     </div>
+    <div style="text-align: center;">{{ error }}</div>
   </div>
 </template>
 
 <style scoped>
-.login-form{
+.login-form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -66,10 +72,10 @@ function signup() {
   padding: 2rem 0;
 }
 
-input, button{
+input,
+button {
   width: 300px;
   box-sizing: border-box;
   padding: 0.4rem 1rem;
 }
-
 </style>
