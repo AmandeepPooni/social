@@ -4,4 +4,4 @@ import app from './app'
 
 
 // Expose express app as a cloud function
-export const api = onRequest(app)
+export const api = onRequest({cors: true}, app)
